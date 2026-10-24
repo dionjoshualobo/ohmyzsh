@@ -21,6 +21,7 @@ plugins=(... extract)
 | `aar`             | Android library file                    |
 | `bz2`             | Bzip2 file                              |
 | `cab`             | Microsoft cabinet archive               |
+| `cbz`             | Comic book zip archive                  |
 | `cpio`            | Cpio archive                            |
 | `deb`             | Debian package                          |
 | `ear`             | Enterprise Application aRchive          |
@@ -30,8 +31,12 @@ plugins=(... extract)
 | `ipsw`            | iOS firmware file                       |
 | `jar`             | Java Archive                            |
 | `lrz`             | LRZ archive                             |
+| `lz`              | Lzip archive                            |
+| `lha`             | LHA/LZH archive                         |
+| `lzh`             | LHA/LZH archive                         |
 | `lz4`             | LZ4 archive                             |
 | `lzma`            | LZMA archive                            |
+| `lzop`            | LZO archive                             |
 | `obscpio`         | cpio archive used on OBS                |
 | `pk3`             | Renamed Zip archive used by Quake games |
 | `pk4`             | Renamed Zip archive used by Quake games |
@@ -48,6 +53,8 @@ plugins=(... extract)
 | `tar.xz`          | Tarball with lzma2 compression          |
 | `tar.zma`         | Tarball with lzma compression           |
 | `tar.zst`         | Tarball with zstd compression           |
+| `tar.br`          | Tarball with brotli compression         |
+| `tbr`             | Tarball with brotli compression         |
 | `tbz`             | Tarball with bzip compression           |
 | `tbz2`            | Tarball with bzip2 compression          |
 | `tgz`             | Tarball with gzip compression           |
@@ -64,6 +71,7 @@ plugins=(... extract)
 | `zlib`            | zlib archive                            |
 | `zst`             | Zstandard file (zstd)                   |
 | `zpaq`            | Zpaq file                               |
+| `br`              | Brotli compressed file                  |
 
 See [list of archive formats](https://en.wikipedia.org/wiki/List_of_archive_formats) for more information
 regarding archive formats.

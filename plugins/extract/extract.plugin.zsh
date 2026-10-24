@@ -11,6 +11,7 @@ Options:
     -r, --remove    Remove archive after unpacking.
     -t, --to-directory <dir>  Extract to a specific directory instead of the current one.
 EOF
+    return 1
   fi
 
   local remove_archive=1
@@ -33,8 +34,10 @@ EOF
         shift
 
         if [[ ! -d "$target_directory" ]]; then
-          echo "extract: '$target_directory' is not a valid directory" >&2
-          return 1
+          command mkdir -p "$target_directory" || {
+            echo "extract: '$target_directory' is not a valid directory" >&2
+            return 1
+          }
         fi
 
         target_directory="${target_directory%/}"
@@ -96,6 +99,10 @@ EOF
         tar --zstd --help &> /dev/null \
         && tar --zstd -xvf "$full_path" \
         || zstdcat "$full_path" | tar xvf - ;;
+      (*.tar.br|*.tbr)
+        (( $+commands[brotli] )) && tar --use-compress-program=brotli -xvf "$full_path" \
+        || (( $+commands[bro] )) && tar --use-compress-program=bro -xvf "$full_path" \
+        || brotli -cd "$full_path" | tar xvf - ;;
       (*.tar) tar xvf "$full_path" ;;
       (*.tar.lz) (( $+commands[lzip] )) && tar xvf "$full_path" ;;
       (*.tar.lz4) lz4 -c -d "$full_path" | tar xvf - ;;
@@ -107,9 +114,10 @@ EOF
       (*.xz) xzcat "$full_path" > "${file:t:r}" ;;
       (*.lrz) (( $+commands[lrunzip] )) && lrunzip "$full_path" ;;
       (*.lz4) lz4 -d "$full_path" ;;
+      (*.lz) (( $+commands[lzip] )) && lzip -cd "$full_path" > "${file:t:r}" || lzcat "$full_path" > "${file:t:r}" ;;
       (*.lzma) unlzma -c "$full_path" > "${file:t:r}" ;;
       (*.z) uncompress -c "$full_path" > "${file:t:r}" ;;
-      (*.zip|*.war|*.jar|*.ear|*.sublime-package|*.ipa|*.ipsw|*.xpi|*.apk|*.aar|*.whl|*.vsix|*.crx|*.pk3|*.pk4) unzip "$full_path" ;;
+      (*.zip|*.war|*.jar|*.ear|*.sublime-package|*.ipa|*.ipsw|*.xpi|*.apk|*.aar|*.whl|*.vsix|*.crx|*.pk3|*.pk4|*.cbz) unzip "$full_path" ;;
       (*.rar)
         if (( $+commands[unrar] )); then
           unrar x -ad "$full_path"
@@ -139,10 +147,13 @@ EOF
         builtin cd -q ../data; extract ../data.tar.*
         builtin cd -q ..; command rm *.tar.* debian-binary ;;
       (*.zst) unzstd --stdout "$full_path" > "${file:t:r}" ;;
+      (*.br) brotli -cd "$full_path" > "${file:t:r}" ;;
       (*.cab|*.exe) cabextract "$full_path" ;;
       (*.cpio|*.obscpio) cpio -idmvF "$full_path" ;;
       (*.zpaq) zpaq x "$full_path" ;;
       (*.zlib) zlib-flate -uncompress < "$full_path" > "${file:r}" ;;
+      (*.lzop) lzop -d "$full_path" ;;
+      (*.lha|*.lzh) lha x "$full_path" ;;
       (*)
         echo "extract: '$file' cannot be extracted" >&2
         success=1 ;;
