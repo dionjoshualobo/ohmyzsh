@@ -58,6 +58,7 @@ fi
 if [[ -x /run/current-system/sw/bin/command-not-found ]]; then
   command_not_found_handler() {
     /run/current-system/sw/bin/command-not-found "$@"
+    return $?
   }
 fi
 
@@ -65,6 +66,7 @@ fi
 if [[ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]]; then
   command_not_found_handler() {
     /data/data/com.termux/files/usr/libexec/termux/command-not-found "$1"
+    return $?
   }
 fi
 
@@ -72,6 +74,7 @@ fi
 if [[ -x /usr/bin/command-not-found ]]; then
   command_not_found_handler() {
     /usr/bin/command-not-found "$1"
+    return $?
   }
 fi
 
