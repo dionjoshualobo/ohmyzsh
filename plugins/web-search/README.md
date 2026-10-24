@@ -58,9 +58,11 @@ Available search contexts are:
 | `wikipedia`           | `https://en.wikipedia.org/w/index.php?search=`  |
 | `chatgpt`             | `https://chatgpt.com/?q=`                       |
 | `claudeai`            | `https://claude.ai/new?q=`                      |
+| `grok`                | `https://grok.com/?q=`                          |
 | `grokcom`             | `https://grok.com/?q=`                          |
 | `reddit`              | `https://www.reddit.com/search/?q=`             |
 | `ppai`                | `https://www.perplexity.ai/search/new?q=`       |
+| `perplexity`          | `https://www.perplexity.ai/search?q=`           |
 | `rscrate`             | `https://crates.io/search?q=`                   |
 | `rsdoc`               | `https://docs.rs/releases/search?query=`        |
 

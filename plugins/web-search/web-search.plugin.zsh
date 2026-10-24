@@ -42,6 +42,7 @@ function web_search() {
     claudeai        "https://claude.ai/new?q="
     reddit          "https://www.reddit.com/search/?q="
     ppai            "https://www.perplexity.ai/search/new?q="
+    perplexity      "https://www.perplexity.ai/search?q="
     rscrate         "https://crates.io/search?q="
     rsdoc           "https://docs.rs/releases/search?query="
   )
@@ -103,10 +104,12 @@ alias aur='web_search aur'
 alias archwiki='web_search archwiki'
 alias wikipedia='web_search wikipedia'
 alias chatgpt='web_search chatgpt'
+alias grok='web_search grok'
 alias grokcom='web_search grok'
 alias claudeai='web_search claudeai'
 alias reddit='web_search reddit'
 alias ppai='web_search ppai'
+alias perplexity='web_search perplexity'
 alias rscrate='web_search rscrate'
 alias rsdoc='web_search rsdoc'
 
