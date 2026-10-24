@@ -8,7 +8,7 @@ fi
 
 # If method undefined, find the first one that is installed
 if [[ -z "$JSONTOOLS_METHOD" ]]; then
-  for JSONTOOLS_METHOD in node python3 ruby; do
+  for JSONTOOLS_METHOD in jq node python3 ruby; do
     # If method found, break out of loop
     (( $+commands[$JSONTOOLS_METHOD] )) && break
     # Otherwise unset the variable
@@ -21,6 +21,20 @@ fi
 
 # Define json tools for each method
 case "$JSONTOOLS_METHOD" in
+  jq)
+    function pp_json() {
+      jq . 2>/dev/null
+    }
+    function is_json() {
+      jq -e . >/dev/null 2>&1 && echo "true" || { echo "false"; return 1; }
+    }
+    function urlencode_json() {
+      jq -sRr @uri
+    }
+    function urldecode_json() {
+      python3 -c "import sys;from urllib.parse import unquote;sys.stdout.write(unquote(sys.stdin.read()))" 2>/dev/null || ruby -rcgi -e "print CGI.unescape(STDIN.read)" 2>/dev/null
+    }
+  ;;
   node)
     # Read stdin directly so input is not limited by command-line argument size.
     function pp_json() {
@@ -114,7 +128,8 @@ unset JSONTOOLS_METHOD
 
 function {pp,is,urlencode,urldecode}_ndjson() {
   local json jsonfunc="${0//ndjson/json}"
-  while read -r json; do
+  while IFS= read -r json || [[ -n "$json" ]]; do
+    [[ -z "$json" ]] && continue
     $jsonfunc <<< "$json"
   done
 }

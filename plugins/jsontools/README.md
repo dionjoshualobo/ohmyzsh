@@ -72,6 +72,8 @@ $ echo '%7B%22b%22:2,%20%22a%22:1%7D' | urldecode_json
 {"b":2, "a":1}
 ```
 
+By default, it uses the first available tool from `jq`, `node`, `python3`, or `ruby`. You can set `JSONTOOLS_METHOD` to override the tool, e.g. `export JSONTOOLS_METHOD=jq`. If `jq` is installed, it will be used by default.
+
 - **pp_ndjson**:
 
 ```console
