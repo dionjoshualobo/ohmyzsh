@@ -1,6 +1,6 @@
 # Don't try to load nvm if command already available
 # Note: nvm is a function so we need to use `which`
-which nvm &>/dev/null && return
+(( $+commands[nvm] )) && return
 
 # See https://github.com/nvm-sh/nvm#installation-and-update
 if [[ -z "$NVM_DIR" ]]; then

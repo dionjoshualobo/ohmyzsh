@@ -1,7 +1,7 @@
 # Initialization: activate autoenv or report its absence
 () {
 local d autoenv_dir install_locations
-if ! type autoenv_init >/dev/null; then
+if ! (( $+functions[autoenv_init] )) && ! type autoenv_init >/dev/null 2>&1; then
   # Check if activate.sh is in $PATH
   if (( $+commands[activate.sh] )); then
     autoenv_dir="${commands[activate.sh]:h}"

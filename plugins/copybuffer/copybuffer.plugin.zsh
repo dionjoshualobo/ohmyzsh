@@ -2,10 +2,10 @@
 # onto the system clipboard
 
 copybuffer () {
-  if builtin which clipcopy &>/dev/null; then
+  if (( $+functions[clipcopy] )); then
     printf "%s" "$BUFFER" | clipcopy
   else
-    zle -M "clipcopy not found. Please make sure you have Oh My Zsh installed correctly."
+    zle -M "clipcopy not found. Please make sure you have Oh My Zsh's clipboard plugin enabled or manually install a clipboard tool."
   fi
 }
 

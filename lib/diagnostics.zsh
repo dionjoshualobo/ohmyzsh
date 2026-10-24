@@ -339,7 +339,7 @@ function _omz_diag_dump_os_specific_version() {
       ;;
   esac
 
-  if builtin which lsb_release >/dev/null; then
+  if (( $+commands[lsb_release] )); then
     builtin echo "OS Release: $(command lsb_release -s -d)"
   fi
 
