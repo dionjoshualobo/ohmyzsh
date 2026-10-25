@@ -62,7 +62,7 @@ Available search contexts are:
 | `grokcom`             | `https://grok.com/?q=`                          |
 | `reddit`              | `https://www.reddit.com/search/?q=`             |
 | `ppai`                | `https://www.perplexity.ai/search/new?q=`       |
-| `perplexity`          | `https://www.perplexity.ai/search?q=`           |
+| `perplexity`          | `https://www.perplexity.ai/search/new?q=`       |
 | `rscrate`             | `https://crates.io/search?q=`                   |
 | `rsdoc`               | `https://docs.rs/releases/search?query=`        |
 
